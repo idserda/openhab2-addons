@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="lib" path="lib/retrofit-2.1.0.jar" sourcepath="/Users/idserda/Downloads/retrofit-2.1.1-20161209.155146-36-sources.jar"/>
+	<classpathentry kind="lib" path="lib/okio-1.8.0.jar"/>
+	<classpathentry kind="lib" path="lib/converter-gson-2.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="lib/okhttp-3.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/color-thief-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/logging-interceptor-3.3.1.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

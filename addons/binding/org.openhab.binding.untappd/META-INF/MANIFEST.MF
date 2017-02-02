@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Untappd Binding
+Bundle-SymbolicName: org.openhab.binding.untappd;singleton:=true
+Bundle-Vendor: openHAB
+Bundle-Version: 2.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: .,
+ lib/gson-2.7.jar,
+ lib/converter-gson-2.1.0.jar,
+ lib/okio-1.8.0.jar,
+ lib/okhttp-3.3.0.jar,
+ lib/logging-interceptor-3.3.1.jar,
+ lib/retrofit-2.1.0.jar,
+ lib/color-thief-1.0.0.jar
+Import-Package: 
+ org.openhab.binding.untappd,
+ org.openhab.binding.untappd.handler,
+ org.eclipse.smarthome.config.core,
+ org.eclipse.smarthome.core.library.types,
+ org.eclipse.smarthome.core.thing,
+ org.eclipse.smarthome.core.thing.binding,
+ org.eclipse.smarthome.core.thing.binding.builder,
+ org.eclipse.smarthome.core.thing.type,
+ org.eclipse.smarthome.core.types,
+ org.slf4j,
+ org.apache.commons.lang
+Service-Component: OSGI-INF/*.xml
+Export-Package: org.openhab.binding.untappd,
+ org.openhab.binding.untappd.handler
