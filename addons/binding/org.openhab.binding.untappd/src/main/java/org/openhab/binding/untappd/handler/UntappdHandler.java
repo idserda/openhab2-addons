@@ -74,6 +74,8 @@ public class UntappdHandler extends BaseThingHandler {
 
     public UntappdHandler(Thing thing) {
         super(thing);
+        logger.trace("constructor");
+
         Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
                 .registerTypeAdapter(Integer.class, new IntegerTypeAdapter())
                 .registerTypeAdapterFactory(new ObjectCheckTypeAdapterFactory()).create();
@@ -93,6 +95,8 @@ public class UntappdHandler extends BaseThingHandler {
 
     @Override
     public void initialize() {
+        logger.trace("initialize");
+
         UntappdConfiguration config = getThing().getConfiguration().as(UntappdConfiguration.class);
         accessToken = config.getAccess_token();
         filterSelf = config.getFilter_self();
@@ -108,10 +112,15 @@ public class UntappdHandler extends BaseThingHandler {
 
     @Override
     public void dispose() {
-        refreshJob.cancel(true);
+        logger.trace("dispose");
+        if (refreshJob != null) {
+            refreshJob.cancel(true);
+        }
     }
 
     private Recent getRecent() {
+        logger.trace("getRecent");
+
         Call<Recent> call = service.recent(accessToken, lastId);
         try {
             return call.execute().body();
@@ -123,6 +132,13 @@ public class UntappdHandler extends BaseThingHandler {
     }
 
     private void updateState(Recent body) {
+        logger.trace("updateState");
+
+        if (body == null) {
+            logger.warn("Recent update from untappd is null");
+            return;
+        }
+
         List<Item> checkins = body.getResponse().getCheckins().getItems();
         Item checkin = getFirstFilteredCheckin(checkins);
         if (checkin != null) {
