@@ -9,6 +9,10 @@ import retrofit2.http.Query;
 public interface UntappdService {
 
     @GET("v4/checkin/recent")
-    Call<Recent> recent(@Query("access_token") String access_token, @Query("min_id") Integer min_id);
+    Call<Recent> recent(@Query("access_token") String accessToken, @Query("min_id") Integer minId,
+            @Query("limit") Integer limit);
+
+    @GET("v4/notifications")
+    Call<Recent> notifications(@Query("access_token") String accessToken, @Query("limit") Integer limit);
 
 }

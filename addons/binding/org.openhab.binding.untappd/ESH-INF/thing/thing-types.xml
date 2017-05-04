@@ -12,10 +12,13 @@
             <channel id="beer_name" typeId="beerNameType"/>
             <channel id="beer_label" typeId="beerLabelType"/>
             <channel id="user" typeId="userType"/>
-            <channel id="checkin" typeId="newCheckinType"/>
             <channel id="last_color" typeId="last_color"/>
             <channel id="last_color_bright" typeId="last_color_bright"/>
             <channel id="date_time" typeId="dateTimeType"/>
+
+            <channel id="checkin" typeId="newCheckinType"/>
+            <channel id="toast" typeId="newToastType"/>
+            <channel id="toast_user" typeId="toastUserType"/>
         </channels>
         
         <config-description>
@@ -73,9 +76,21 @@
         <state readOnly="true" />
     </channel-type>
     
+    <channel-type id="toastUserType">
+        <item-type>String</item-type>
+        <label>User toast name</label>
+        <description>Name of the user of the last toast</description>
+        <state readOnly="true"></state>
+    </channel-type>
+    
     <channel-type id="newCheckinType">
         <kind>trigger</kind>
         <label>New Check-in</label>
+    </channel-type>
+    
+    <channel-type id="newToastType">
+        <kind>trigger</kind>
+        <label>New toast</label>
     </channel-type>
 
 </thing:thing-descriptions>

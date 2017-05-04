@@ -10,7 +10,6 @@ public class Recent {
     @SerializedName("notifications")
     private Notifications notifications;
     @SerializedName("response")
-
     private Response response;
 
     public Meta getMeta() {

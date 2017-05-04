@@ -24,6 +24,8 @@ public class UntappdBindingConstants {
 
     // List of all Channel ids
     public final static String CHANNEL_NEWCHECKIN = "checkin";
+    public final static String CHANNEL_NEWTOAST = "toast";
+
     public final static String CHANNEL_BEER_NAME = "beer_name";
     public final static String CHANNEL_BEER_LABEL = "beer_label";
     public final static String CHANNEL_USER = "user";
@@ -31,4 +33,5 @@ public class UntappdBindingConstants {
     public final static String CHANNEL_LAST_COLOR_BRIGHT = "last_color_bright";
     public final static String CHANNEL_DATE_TIME = "date_time";
 
+    public final static String TOAST_USER = "toast_user";
 }

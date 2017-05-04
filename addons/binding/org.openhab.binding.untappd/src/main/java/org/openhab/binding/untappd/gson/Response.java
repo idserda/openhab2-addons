@@ -13,6 +13,10 @@ public class Response {
     private Checkins checkins;
     @SerializedName("pagination")
     private Pagination pagination;
+    @SerializedName("news")
+    private News news;
+    @SerializedName("notifications")
+    private NotificationItems notifications;
 
     public String getMethod() {
         return method;
@@ -44,6 +48,22 @@ public class Response {
 
     public void setPagination(Pagination pagination) {
         this.pagination = pagination;
+    }
+
+    public News getNews() {
+        return news;
+    }
+
+    public void setNews(News news) {
+        this.news = news;
+    }
+
+    public NotificationItems getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(NotificationItems notifications) {
+        this.notifications = notifications;
     }
 
 }
