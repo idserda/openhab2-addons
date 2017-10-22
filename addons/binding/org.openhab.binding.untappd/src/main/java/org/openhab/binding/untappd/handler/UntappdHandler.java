@@ -45,16 +45,10 @@ import org.openhab.binding.untappd.internal.UntappdConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import de.androidpit.colorthief.ColorThief;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * The {@link UntappdHandler} is responsible for handling commands, which are
@@ -84,22 +78,12 @@ public class UntappdHandler extends BaseThingHandler {
 
     private String accessToken;
 
-    private boolean filterSelf;
+    private boolean hideSelf;
 
     public UntappdHandler(Thing thing) {
         super(thing);
         logger.trace("constructor");
-
-        Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz")
-                .registerTypeAdapter(Integer.class, new IntegerTypeAdapter())
-                .registerTypeAdapterFactory(new ObjectCheckTypeAdapterFactory()).create();
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.untappd.com/").client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson)).build();
-        service = retrofit.create(UntappdService.class);
+        service = RetroFitService.getUntappdService();
     }
 
     @Override
@@ -112,8 +96,8 @@ public class UntappdHandler extends BaseThingHandler {
         logger.trace("initialize");
 
         UntappdConfiguration config = getThing().getConfiguration().as(UntappdConfiguration.class);
-        accessToken = config.getAccess_token();
-        filterSelf = config.getFilter_self();
+        accessToken = getThing().getProperties().get(UntappdBindingConstants.PARAMETER_TOKEN);
+        hideSelf = config.getHideSelf();
 
         Recent recent = getRecent();
         if (recent != null) {
@@ -245,7 +229,7 @@ public class UntappdHandler extends BaseThingHandler {
         List<Item> ret = new ArrayList<>();
 
         for (Item checkin : checkins) {
-            if (!filterSelf || !checkin.getUser().getRelationship().equals("self")) {
+            if (!hideSelf || !checkin.getUser().getRelationship().equals("self")) {
                 ret.add(checkin);
             }
         }
@@ -409,4 +393,5 @@ public class UntappdHandler extends BaseThingHandler {
 
         protected abstract void handleItem(T item);
     }
+
 }

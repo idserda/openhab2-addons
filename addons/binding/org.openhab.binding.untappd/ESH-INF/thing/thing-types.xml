@@ -22,12 +22,8 @@
         </channels>
         
         <config-description>
-	        <parameter name="access_token" type="text" required="true">
-	            <label>Access token</label>
-	            <description>Access token</description>
-	        </parameter>
-	        <parameter name="filter_self" type="boolean" required="false">
-                <label>Show your own checkins in timeline</label>
+	        <parameter name="hideSelf" type="boolean" required="false">
+                <label>Hide your own checkins in timeline</label>
                 <description>Filter your own checkin from the timeline</description>
             </parameter>
         </config-description>

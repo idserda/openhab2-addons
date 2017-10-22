@@ -10,24 +10,35 @@ package org.openhab.binding.untappd.internal;
 import static org.openhab.binding.untappd.UntappdBindingConstants.THING_TYPE_CHECKIN;
 
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.Set;
 
 import org.eclipse.smarthome.core.thing.Thing;
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 import org.eclipse.smarthome.core.thing.binding.BaseThingHandlerFactory;
 import org.eclipse.smarthome.core.thing.binding.ThingHandler;
+import org.openhab.binding.untappd.UntappdAuth;
 import org.openhab.binding.untappd.handler.UntappdHandler;
+import org.osgi.service.component.ComponentContext;
 
 /**
- * The {@link UntappdHandlerFactory} is responsible for creating things and thing 
+ * The {@link UntappdHandlerFactory} is responsible for creating things and thing
  * handlers.
- * 
+ *
  * @author Jeroen Idserda - Initial contribution
  */
 public class UntappdHandlerFactory extends BaseThingHandlerFactory {
-    
+
     private final static Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Collections.singleton(THING_TYPE_CHECKIN);
-    
+
+    @Override
+    protected void activate(ComponentContext componentContext) {
+        super.activate(componentContext);
+        Dictionary<String, Object> properties = componentContext.getProperties();
+        UntappdAuth.get().setClientId((String) properties.get("clientid"));
+        UntappdAuth.get().setClientSecret((String) properties.get("clientsecret"));
+    }
+
     @Override
     public boolean supportsThingType(ThingTypeUID thingTypeUID) {
         return SUPPORTED_THING_TYPES_UIDS.contains(thingTypeUID);
@@ -45,4 +56,3 @@ public class UntappdHandlerFactory extends BaseThingHandlerFactory {
         return null;
     }
 }
-

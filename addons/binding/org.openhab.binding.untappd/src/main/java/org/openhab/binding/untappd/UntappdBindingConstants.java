@@ -7,6 +7,9 @@
  */
 package org.openhab.binding.untappd;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.eclipse.smarthome.core.thing.ThingTypeUID;
 
 /**
@@ -34,4 +37,9 @@ public class UntappdBindingConstants {
     public final static String CHANNEL_DATE_TIME = "date_time";
 
     public final static String TOAST_USER = "toast_user";
+
+    public final static String PARAMETER_TOKEN = "token";
+
+    public final static Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Collections.singleton(THING_TYPE_CHECKIN);
+
 }

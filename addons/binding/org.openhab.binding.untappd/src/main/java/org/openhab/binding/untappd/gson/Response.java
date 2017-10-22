@@ -17,6 +17,8 @@ public class Response {
     private News news;
     @SerializedName("notifications")
     private NotificationItems notifications;
+    @SerializedName("user")
+    private User user;
 
     public String getMethod() {
         return method;
@@ -64,6 +66,14 @@ public class Response {
 
     public void setNotifications(NotificationItems notifications) {
         this.notifications = notifications;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

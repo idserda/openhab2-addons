@@ -7,5 +7,18 @@
     <name>Untappd Binding</name>
     <description>This is the binding for Untappd.</description>
     <author>Jeroen Idserda</author>
+    
+    <config-description>
+        <parameter name="clientid" type="text">
+            <label>Client ID</label>
+            <description>Untappd Application Client ID</description>
+            <required>true</required>
+        </parameter>
+        <parameter name="clientsecret" type="text">
+            <label>Client Secret</label>
+            <description>Untappd Application Client Secret</description>
+            <required>true</required>
+        </parameter>
+    </config-description>
 
 </binding:binding>
