@@ -3,8 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Untappd Binding
 Bundle-SymbolicName: org.openhab.binding.untappd;singleton:=true
 Bundle-Vendor: openHAB
-Bundle-Version: 2.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Version: 2.2.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .,
  lib/gson-2.7.jar,
  lib/converter-gson-2.1.0.jar,

@@ -11,6 +11,7 @@
 -->
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.openhab.binding.untappd.discovery">
    <implementation class="org.openhab.binding.untappd.discovery.UntappdDiscoveryService" />
+   <property name="implementation" value="UntappdDiscoveryService" />
    <service>
       <provide interface="org.eclipse.smarthome.config.discovery.DiscoveryService"/>
    </service>
