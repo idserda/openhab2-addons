@@ -20,7 +20,7 @@ import java.net.UnknownHostException;
 
 import org.eclipse.smarthome.core.thing.Bridge;
 import org.eclipse.smarthome.core.thing.ThingStatus;
-import org.openhab.binding.dscalarm.config.TCPServerBridgeConfiguration;
+import org.openhab.binding.dscalarm.internal.config.TCPServerBridgeConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +47,7 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
     private String ipAddress;
     private int tcpPort;
     private int connectionTimeout;
+    private int protocol;
     private Socket tcpSocket = null;
     private OutputStreamWriter tcpOutput = null;
     private BufferedReader tcpInput = null;
@@ -63,11 +64,18 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
             tcpPort = configuration.port.intValue();
             connectionTimeout = configuration.connectionTimeout.intValue();
             pollPeriod = configuration.pollPeriod.intValue();
+            protocol = configuration.protocol.intValue();
 
             if (this.pollPeriod > 15) {
                 this.pollPeriod = 15;
             } else if (this.pollPeriod < 1) {
                 this.pollPeriod = 1;
+            }
+
+            if (this.protocol == 2) {
+                setProtocol(DSCAlarmProtocol.ENVISALINK_TPI);
+            } else {
+                setProtocol(DSCAlarmProtocol.IT100_API);
             }
 
             logger.debug("TCP Server Bridge Handler Initialized");
@@ -89,9 +97,6 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
         super.dispose();
     }
 
-    /**
-     * {@inheritDoc}
-     **/
     @Override
     public void openConnection() {
         try {
@@ -100,8 +105,8 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
             logger.debug("openConnection(): Connecting to Envisalink ");
 
             tcpSocket = new Socket();
-            SocketAddress TPIsocketAddress = new InetSocketAddress(ipAddress, tcpPort);
-            tcpSocket.connect(TPIsocketAddress, connectionTimeout);
+            SocketAddress tpiSocketAddress = new InetSocketAddress(ipAddress, tcpPort);
+            tcpSocket.connect(tpiSocketAddress, connectionTimeout);
             tcpOutput = new OutputStreamWriter(tcpSocket.getOutputStream(), "US-ASCII");
             tcpInput = new BufferedReader(new InputStreamReader(tcpSocket.getInputStream()));
 
@@ -124,9 +129,6 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     **/
     @Override
     public void write(String writeString) {
         try {
@@ -142,9 +144,6 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     **/
     @Override
     public String read() {
         String message = "";
@@ -163,9 +162,6 @@ public class TCPServerBridgeHandler extends DSCAlarmBaseBridgeHandler {
         return message;
     }
 
-    /**
-     * {@inheritDoc}
-     **/
     @Override
     public void closeConnection() {
         try {

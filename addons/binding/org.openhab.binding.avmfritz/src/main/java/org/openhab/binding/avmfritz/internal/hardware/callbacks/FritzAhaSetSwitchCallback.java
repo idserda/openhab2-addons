@@ -35,16 +35,13 @@ public class FritzAhaSetSwitchCallback extends FritzAhaReauthCallback {
     public FritzAhaSetSwitchCallback(FritzahaWebInterface webIface, String ain, boolean switchOn) {
         super(WEBSERVICE_PATH, "ain=" + ain + "&switchcmd=" + (switchOn ? "setswitchon" : "setswitchoff"), webIface,
                 Method.GET, 1);
-        this.itemName = ain;
+        itemName = ain;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void execute(int status, String response) {
         super.execute(status, response);
-        if (this.isValidRequest()) {
+        if (isValidRequest()) {
             logger.debug("Received State response {} for item {}", response, itemName);
         }
     }

@@ -8,7 +8,6 @@
  */
 package org.openhab.binding.homematic.internal.communicator.message;
 
-import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,7 @@ import org.apache.commons.lang.StringEscapeUtils;
  *
  * @author Gerhard Riegler - Initial contribution
  */
-public class XmlRpcRequest implements RpcRequest {
+public class XmlRpcRequest implements RpcRequest<String> {
 
     public enum TYPE {
         REQUEST,
@@ -50,37 +49,21 @@ public class XmlRpcRequest implements RpcRequest {
         parms = new ArrayList<Object>();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void addArg(Object parameter) {
         parms.add(parameter);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public byte[] createMessage() {
-        try {
-            return toString().getBytes("ISO-8859-1");
-        } catch (UnsupportedEncodingException ex) {
-            throw new RuntimeException(ex.getMessage(), ex);
-        }
+    public String createMessage() {
+        return toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String getMethodName() {
         return methodName;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
         sb = new StringBuilder();

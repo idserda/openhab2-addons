@@ -18,13 +18,17 @@ import org.openhab.binding.rfxcom.internal.exceptions.RFXComException;
 import org.openhab.binding.rfxcom.internal.exceptions.RFXComMessageNotImplementedException;
 import org.openhab.binding.rfxcom.internal.messages.RFXComBaseMessage.PacketType;
 
+/**
+ *
+ * @author Pauli Anttila - Initial contribution
+ */
 public class RFXComMessageFactory {
 
     @SuppressWarnings("serial")
     private static final Map<PacketType, Class<? extends RFXComMessage>> MESSAGE_CLASSES = Collections
             .unmodifiableMap(new HashMap<PacketType, Class<? extends RFXComMessage>>() {
                 {
-                    put(PacketType.INTERFACE_CONTROL, RFXComControlMessage.class);
+                    put(PacketType.INTERFACE_CONTROL, RFXComInterfaceControlMessage.class);
                     put(PacketType.INTERFACE_MESSAGE, RFXComInterfaceMessage.class);
                     put(PacketType.TRANSMITTER_MESSAGE, RFXComTransmitterMessage.class);
                     put(PacketType.UNDECODED_RF_MESSAGE, RFXComUndecodedRFMessage.class);
@@ -34,21 +38,21 @@ public class RFXComMessageFactory {
                     put(PacketType.LIGHTING4, RFXComLighting4Message.class);
                     put(PacketType.LIGHTING5, RFXComLighting5Message.class);
                     put(PacketType.LIGHTING6, RFXComLighting6Message.class);
-                    // put(PacketType.CHIME, RFXComChimeMessage.class);
+                    put(PacketType.CHIME, RFXComChimeMessage.class);
                     // put(PacketType.FAN, RFXComFanMessage.class);
                     put(PacketType.CURTAIN1, RFXComCurtain1Message.class);
                     put(PacketType.BLINDS1, RFXComBlinds1Message.class);
                     put(PacketType.RFY, RFXComRfyMessage.class);
-                    // put(PacketType.HOME_CONFORT, RFXComHomeConfort.class);
+                    put(PacketType.HOME_CONFORT, RFXComHomeConfortMessage.class);
                     put(PacketType.SECURITY1, RFXComSecurity1Message.class);
-                    // put(PacketType.SECURITY2, RFXComSecurity2Message.class);
+                    put(PacketType.SECURITY2, RFXComSecurity2Message.class);
                     // put(PacketType.CAMERA1, RFXComCamera1Message.class);
                     // put(PacketType.REMOTE_CONTROL, RFXComRemoteControlMessage.class);
                     put(PacketType.THERMOSTAT1, RFXComThermostat1Message.class);
                     // put(PacketType.THERMOSTAT2, RFXComThermostat2Message.class);
                     // put(PacketType.THERMOSTAT3, RFXComThermostat3Message.class);
                     // put(PacketType.RADIATOR1, RFXComRadiator1Message.class);
-                    // put(PacketType.BBQ1, RFXComBBQMessage.class);
+                    put(PacketType.BBQ, RFXComBBQTemperatureMessage.class);
                     put(PacketType.TEMPERATURE_RAIN, RFXComTemperatureRainMessage.class);
                     put(PacketType.TEMPERATURE, RFXComTemperatureMessage.class);
                     put(PacketType.HUMIDITY, RFXComHumidityMessage.class);
@@ -57,7 +61,7 @@ public class RFXComMessageFactory {
                     put(PacketType.TEMPERATURE_HUMIDITY_BAROMETRIC, RFXComTemperatureHumidityBarometricMessage.class);
                     put(PacketType.RAIN, RFXComRainMessage.class);
                     put(PacketType.WIND, RFXComWindMessage.class);
-                    // put(PacketType.UV, RFXComUVMessage.class);
+                    put(PacketType.UV, RFXComUVMessage.class);
                     put(PacketType.DATE_TIME, RFXComDateTimeMessage.class);
                     // put(PacketType.CURRENT, RFXComCurrentMessage.class);
                     put(PacketType.ENERGY, RFXComEnergyMessage.class);

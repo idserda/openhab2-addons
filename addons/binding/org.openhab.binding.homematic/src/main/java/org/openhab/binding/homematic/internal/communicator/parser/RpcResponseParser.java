@@ -22,15 +22,12 @@ import org.openhab.binding.homematic.internal.communicator.message.RpcRequest;
  * @author Gerhard Riegler - Initial contribution
  */
 public class RpcResponseParser extends CommonRpcParser<Object[], Object[]> {
-    private RpcRequest response;
+    private RpcRequest<?> request;
 
-    public RpcResponseParser(RpcRequest request) {
-        this.response = request;
+    public RpcResponseParser(RpcRequest<?> request) {
+        this.request = request;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     @SuppressWarnings("unchecked")
     public Object[] parse(Object[] message) throws IOException {
@@ -41,7 +38,7 @@ public class RpcResponseParser extends CommonRpcParser<Object[], Object[]> {
                 if (map.containsKey("faultCode")) {
                     Number faultCode = toNumber(map.get("faultCode"));
                     String faultString = toString(map.get("faultString"));
-                    String faultMessage = String.format("%s %s (sending %s)", faultCode, faultString, response);
+                    String faultMessage = String.format("%s %s (sending %s)", faultCode, faultString, request);
                     if (faultCode.intValue() == -1 && StringUtils.equals("Failure", faultString)) {
                         throw new UnknownRpcFailureException(faultMessage);
                     } else if (faultCode.intValue() == -3 && StringUtils.equals("Unknown paramset", faultString)) {
